@@ -2,5 +2,5 @@ package fr.afpa;
 
 public abstract interface Herbivore {
 
-    public void mangerPlante();
+    public void mangerAlgue(Algue algue);
 }
