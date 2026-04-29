@@ -7,4 +7,11 @@ public abstract class PoissonHerbivore extends Poisson implements Herbivore {
 
     }
 
+    public void mangerAlgue(Algue algue) {
+
+        this.setPv(getPv() + 3);
+        algue.setPv(algue.getPv() - 2);
+
+    }
+
 }

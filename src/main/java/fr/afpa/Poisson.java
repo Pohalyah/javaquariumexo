@@ -10,6 +10,12 @@ public abstract class Poisson extends EtreVivant {
         this.sexe = sexe;
     }
 
+    @Override
+    public void vivreUnTour() {
+        setPv(getPv() - 1);
+        vieillir();
+    }
+
     public enum Sexe {
         MALE,
         FEMELLE
@@ -34,7 +40,7 @@ public abstract class Poisson extends EtreVivant {
     @Override
     public String toString() {
 
-        return "Poisson: " + getNom() + " " + getSexe();
+        return "Poisson: " + getNom() + ", " + getSexe() + ", " + getPv() + " PV, " + getAge() + " d'age";
     }
 
 }
