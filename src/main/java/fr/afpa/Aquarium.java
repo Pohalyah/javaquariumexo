@@ -3,18 +3,33 @@ package fr.afpa;
 import java.util.ArrayList;
 import java.util.Random;
 
+import fr.afpa.Poisson.Sexe;
+import fr.afpa.TypePoisson.Bar;
+import fr.afpa.TypePoisson.Carpe;
+import fr.afpa.TypePoisson.Merou;
+import fr.afpa.TypePoisson.PoissonClown;
+import fr.afpa.TypePoisson.Sole;
+import fr.afpa.TypePoisson.Thon;
+
 public class Aquarium {
 
     int numeroTour = 0;
+
+    String[] tableauDeNomMale = { "Nicolas", "Bob", "Didier", "David", "Jacques", "Camille", "Ludoc", "Vincent",
+            "Olvier", "Laurent", "Valentin", "Igor", "Clément" };
+    String[] tableauDeNomFemelle = { "Victoria", "Orianna", "Lucie", "Vivianne", "Isabelle", "Camille", "Ludivine",
+            "Gabrielle", "Ursula", "Tania", "Elisabeth", "Anissa", "Lisa", "Nadia" };
 
     Random r = new Random();
     private ArrayList<Poisson> poissons = new ArrayList<>();
     private ArrayList<Poisson> poissonsMorts = new ArrayList<>();
     private ArrayList<Poisson> poissonsMortsTemp = new ArrayList<>();
+    private ArrayList<Poisson> poissonsNaissance = new ArrayList<>();
 
     private ArrayList<Algue> algues = new ArrayList<>();
     private ArrayList<Algue> alguesMortes = new ArrayList<>();
     private ArrayList<Algue> alguesMortesTemp = new ArrayList<>();
+    private ArrayList<Algue> alguesNaissance = new ArrayList<>();
 
     public void addPoisson(Poisson poisson) {
         poissons.add(poisson);
@@ -22,6 +37,69 @@ public class Aquarium {
 
     public void addAlgue(Algue algue) {
         algues.add(algue);
+    }
+
+    public Poisson donnerNaissancePoisson(Poisson cePoisson) {
+        int sexeRandom = r.nextInt(0, 2);
+        Sexe sexePoisson;
+        String nomPoisson;
+        if (sexeRandom == 0) {
+            sexePoisson = Sexe.MALE;
+            int nomRandom = r.nextInt(0, tableauDeNomMale.length);
+            nomPoisson = tableauDeNomMale[nomRandom];
+
+        } else {
+            sexePoisson = Sexe.FEMELLE;
+            int nomRandom = r.nextInt(0, tableauDeNomFemelle.length);
+            nomPoisson = tableauDeNomFemelle[nomRandom];
+        }
+
+        if (cePoisson instanceof Bar) {
+
+            return new Bar(nomPoisson, sexePoisson);
+        } else if (cePoisson instanceof Carpe) {
+
+            return new Carpe(nomPoisson, sexePoisson);
+        } else if (cePoisson instanceof Merou) {
+
+            return new Merou(nomPoisson, sexePoisson);
+        } else if (cePoisson instanceof PoissonClown) {
+
+            return new PoissonClown(nomPoisson, sexePoisson);
+        } else if (cePoisson instanceof Sole) {
+
+            return new Sole(nomPoisson, sexePoisson);
+        } else if (cePoisson instanceof Thon) {
+
+            return new Thon(nomPoisson, sexePoisson);
+        } else {
+            throw new IllegalStateException("Erreur.");
+        }
+
+    }
+
+    public void reproductionPoisson() {
+        for (int i = 0; i < poissons.size(); i++) {
+
+            Poisson cePoisson = poissons.get(i);
+
+            int indexPoisson = r.nextInt(0, poissons.size());
+            Poisson poissonChoisi = poissons.get(indexPoisson);
+            if (cePoisson.getPv() > 5 && cePoisson != poissonChoisi) {
+                if (cePoisson.getClass() == poissonChoisi.getClass()
+                        && cePoisson.getSexe() != poissonChoisi.getSexe()) {
+                    if (cePoisson.getAge() >= 5 && poissonChoisi.getAge() >= 5) {
+                        donnerNaissancePoisson(cePoisson);
+
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void reproductionAlgue() {
+
     }
 
     public void mangerUnTruc() {
