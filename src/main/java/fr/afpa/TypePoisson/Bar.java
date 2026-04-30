@@ -16,4 +16,15 @@ public class Bar extends PoissonHerbivore {
         throw new UnsupportedOperationException("Unimplemented method 'mangerAlgue'");
     }
 
+    // @Override
+    // public void sexeChanges() {
+    // if (getAge() == 10) {
+    // if (getSexe() == Sexe.MALE) {
+    // setSexe(Sexe.FEMELLE);
+    // } else {
+    // setSexe(Sexe.MALE);
+    // }
+    // }
+    // }
+
 }

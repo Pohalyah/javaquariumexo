@@ -9,4 +9,15 @@ public class Merou extends PoissonCarnivore {
 
     }
 
+    // @Override
+    // public void sexeChanges() {
+    // if (getAge() == 10) {
+    // if (getSexe() == Sexe.MALE) {
+    // setSexe(Sexe.FEMELLE);
+    // } else {
+    // setSexe(Sexe.MALE);
+    // }
+    // }
+    // }
+
 }

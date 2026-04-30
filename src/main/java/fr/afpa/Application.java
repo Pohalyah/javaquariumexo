@@ -50,7 +50,7 @@ public class Application {
         aquarium1.addAlgue(algue7);
         aquarium1.addAlgue(algue8);
 
-        for (int i = 0; i < 5; i++) {
+        while (!aquarium1.isEmpty()) {
             aquarium1.jouerTour();
 
         }

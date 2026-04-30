@@ -14,7 +14,11 @@ public abstract class Poisson extends EtreVivant {
     public void vivreUnTour() {
         setPv(getPv() - 1);
         vieillir();
+        // sexeChanges();
     }
+
+    // public void sexeChanges() {
+    // }
 
     public enum Sexe {
         MALE,

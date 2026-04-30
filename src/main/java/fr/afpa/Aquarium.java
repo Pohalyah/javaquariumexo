@@ -79,6 +79,7 @@ public class Aquarium {
     }
 
     public void reproductionPoisson() {
+        poissonsNaissance.clear();
         for (int i = 0; i < poissons.size(); i++) {
 
             Poisson cePoisson = poissons.get(i);
@@ -89,17 +90,28 @@ public class Aquarium {
                 if (cePoisson.getClass() == poissonChoisi.getClass()
                         && cePoisson.getSexe() != poissonChoisi.getSexe()) {
                     if (cePoisson.getAge() >= 5 && poissonChoisi.getAge() >= 5) {
-                        donnerNaissancePoisson(cePoisson);
+                        Poisson nouveauBebe = donnerNaissancePoisson(cePoisson);
+                        poissonsNaissance.add(nouveauBebe);
 
                     }
 
                 }
             }
         }
+        poissons.addAll(poissonsNaissance);
     }
 
     public void reproductionAlgue() {
+        alguesNaissance.clear();
+        for (int i = 0; i < algues.size(); i++) {
+            Algue cetAlgue = algues.get(i);
 
+            if (cetAlgue.getPv() >= 10) {
+                Algue nouveauAlgue = cetAlgue.seReproduire();
+                alguesNaissance.add(nouveauAlgue);
+            }
+        }
+        algues.addAll(alguesNaissance);
     }
 
     public void mangerUnTruc() {
@@ -155,6 +167,14 @@ public class Aquarium {
         }
         alguesMortes.addAll(alguesMortesTemp);
         algues.removeAll(alguesMortesTemp);
+    }
+
+    public boolean isEmpty() {
+        if (poissons.size() <= 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void jouerTour() {

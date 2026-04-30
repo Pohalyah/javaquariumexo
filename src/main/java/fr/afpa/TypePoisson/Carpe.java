@@ -10,6 +10,10 @@ public class Carpe extends PoissonHerbivore {
 
     }
 
+    // public void sexeChanges() {
+
+    // }
+
     @Override
     public void mangerAlgue(Algue algue) {
 

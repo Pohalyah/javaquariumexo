@@ -10,6 +10,10 @@ public class Sole extends PoissonHerbivore {
 
     }
 
+    // public void sexeChanges() {
+
+    // }
+
     @Override
     public void mangerAlgue(Algue algue) {
 

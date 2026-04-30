@@ -17,6 +17,12 @@ public class Algue extends EtreVivant {
 
     }
 
+    public Algue seReproduire() {
+        int pvActuel = getPv();
+        setPv(pvActuel / 2);
+        return new Algue(pvActuel / 2, 0);
+    }
+
     @Override
     public String toString() {
 

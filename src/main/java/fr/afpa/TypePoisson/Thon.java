@@ -9,4 +9,8 @@ public class Thon extends PoissonCarnivore {
 
     }
 
+    // public void sexeChanges() {
+
+    // }
+
 }
