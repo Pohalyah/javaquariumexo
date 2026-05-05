@@ -1,6 +1,8 @@
 package fr.afpa;
 
-public abstract class EtreVivant {
+import java.io.Serializable;
+
+public abstract class EtreVivant implements Serializable {
     private int pv;
     private int age;
 

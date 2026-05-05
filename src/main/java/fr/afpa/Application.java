@@ -1,5 +1,7 @@
 package fr.afpa;
 
+import java.util.Scanner;
+
 import fr.afpa.Poisson.Sexe;
 import fr.afpa.TypePoisson.Merou;
 import fr.afpa.TypePoisson.PoissonClown;
@@ -7,6 +9,8 @@ import fr.afpa.TypePoisson.PoissonClown;
 public class Application {
 
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
 
         boolean partieTerminee = false;
         Aquarium aquarium1 = new Aquarium();
@@ -51,7 +55,29 @@ public class Application {
         aquarium1.addAlgue(algue8);
 
         while (!aquarium1.isEmpty()) {
-            aquarium1.jouerTour();
+
+            System.out.println("D = Démarrer simulation");
+            System.out.println("T = Tour suivant");
+            System.out.println("S = Sauvegarder");
+            System.out.println("C = Charger sauvegarde");
+            System.out.println("Q = Sauvegarder et quitter partie");
+
+            String inputUser = scanner.nextLine();
+
+            if ("T".equals(inputUser)) {
+                aquarium1.jouerTour();
+
+            } else if ("S".equals(inputUser)) {
+                aquarium1.sauvegarder("save.poisson");
+
+            } else if ("C".equals(inputUser)) {
+                aquarium1 = Aquarium.charger("save.poisson");
+
+            } else if ("Q".equals(inputUser)) {
+                aquarium1.sauvegarder("save.poisson");
+                break;
+
+            }
 
         }
 

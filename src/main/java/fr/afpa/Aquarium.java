@@ -1,19 +1,24 @@
 package fr.afpa;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 import fr.afpa.Poisson.Sexe;
 import fr.afpa.TypePoisson.Bar;
 import fr.afpa.TypePoisson.Carpe;
-import fr.afpa.TypePoisson.HermaphroditeAge;
 import fr.afpa.TypePoisson.HermaphroditeSexe;
 import fr.afpa.TypePoisson.Merou;
 import fr.afpa.TypePoisson.PoissonClown;
 import fr.afpa.TypePoisson.Sole;
 import fr.afpa.TypePoisson.Thon;
 
-public class Aquarium {
+public class Aquarium implements Serializable {
 
     int numeroTour = 0;
 
@@ -32,6 +37,33 @@ public class Aquarium {
     private ArrayList<Algue> alguesMortes = new ArrayList<>();
     private ArrayList<Algue> alguesMortesTemp = new ArrayList<>();
     private ArrayList<Algue> alguesNaissance = new ArrayList<>();
+
+    public void sauvegarder(String nomFichier) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream(nomFichier));
+            oos.writeObject(this);
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Aquarium charger(String nomFichier) {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomFichier));
+            Aquarium aquarium = (Aquarium) ois.readObject();
+
+            ois.close();
+
+            return aquarium;
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     public void addPoisson(Poisson poisson) {
         poissons.add(poisson);
@@ -131,6 +163,7 @@ public class Aquarium {
                         int randomChance = r.nextInt(0, 2);
                         if (randomChance == 1) {
                             cePoisson.mangerViande(poissonMordu);
+
                         }
                     }
                 }
@@ -213,7 +246,6 @@ public class Aquarium {
 
         StringBuilder texte = new StringBuilder();
 
-        // --- PLANTES ---
         texte.append("Nombre de plante : ")
                 .append(algues.size())
                 .append("\n");
@@ -226,9 +258,8 @@ public class Aquarium {
                     .append("\n");
         }
 
-        texte.append("\n"); // séparation
+        texte.append("\n");
 
-        // --- POISSONS ---
         texte.append("Nombre de poisson : ")
                 .append(poissons.size())
                 .append("\n");
