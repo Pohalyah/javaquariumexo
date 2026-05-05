@@ -1,5 +1,7 @@
 package fr.afpa.TypePoisson;
 
-public class HermaphroditeAge {
+public interface HermaphroditeAge {
+
+    public void changeSexe();
 
 }

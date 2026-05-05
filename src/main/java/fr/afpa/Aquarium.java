@@ -6,6 +6,8 @@ import java.util.Random;
 import fr.afpa.Poisson.Sexe;
 import fr.afpa.TypePoisson.Bar;
 import fr.afpa.TypePoisson.Carpe;
+import fr.afpa.TypePoisson.HermaphroditeAge;
+import fr.afpa.TypePoisson.HermaphroditeSexe;
 import fr.afpa.TypePoisson.Merou;
 import fr.afpa.TypePoisson.PoissonClown;
 import fr.afpa.TypePoisson.Sole;
@@ -87,14 +89,16 @@ public class Aquarium {
             int indexPoisson = r.nextInt(0, poissons.size());
             Poisson poissonChoisi = poissons.get(indexPoisson);
             if (cePoisson.getPv() > 5 && cePoisson != poissonChoisi) {
-                if (cePoisson.getClass() == poissonChoisi.getClass()
-                        && cePoisson.getSexe() != poissonChoisi.getSexe()) {
+                if (cePoisson.getClass() == poissonChoisi.getClass()) {
                     if (cePoisson.getAge() >= 5 && poissonChoisi.getAge() >= 5) {
-                        Poisson nouveauBebe = donnerNaissancePoisson(cePoisson);
-                        poissonsNaissance.add(nouveauBebe);
-
+                        if (cePoisson instanceof HermaphroditeSexe cePoissonHermaphroditeSexe) {
+                            cePoissonHermaphroditeSexe.changeSexe(poissonChoisi);
+                        }
+                        if (cePoisson.getSexe() != poissonChoisi.getSexe()) {
+                            Poisson nouveauBebe = donnerNaissancePoisson(cePoisson);
+                            poissonsNaissance.add(nouveauBebe);
+                        }
                     }
-
                 }
             }
         }
@@ -192,6 +196,9 @@ public class Aquarium {
         deleteMortsPoissons();
 
         mangerUnTruc();
+
+        reproductionAlgue();
+        reproductionPoisson();
 
         deleteMortsAlgues();
         deleteMortsPoissons();

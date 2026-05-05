@@ -1,5 +1,8 @@
 package fr.afpa.TypePoisson;
 
-public class HermaphroditeSexe {
+import fr.afpa.Poisson;
 
+public interface HermaphroditeSexe {
+
+    public void changeSexe(Poisson partenaire);
 }
