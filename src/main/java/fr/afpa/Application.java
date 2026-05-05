@@ -12,7 +12,6 @@ public class Application {
 
         Scanner scanner = new Scanner(System.in);
 
-        boolean partieTerminee = false;
         Aquarium aquarium1 = new Aquarium();
 
         Poisson poisson1 = new Merou("Jacobus", Sexe.MALE);
@@ -64,16 +63,16 @@ public class Application {
 
             String inputUser = scanner.nextLine();
 
-            if ("T".equals(inputUser)) {
+            if ("T".equals(inputUser) || "t".equals(inputUser)) {
                 aquarium1.jouerTour();
 
-            } else if ("S".equals(inputUser)) {
+            } else if ("S".equals(inputUser) || "s".equals(inputUser)) {
                 aquarium1.sauvegarder("save.poisson");
 
-            } else if ("C".equals(inputUser)) {
+            } else if ("C".equals(inputUser) || "c".equals(inputUser)) {
                 aquarium1 = Aquarium.charger("save.poisson");
 
-            } else if ("Q".equals(inputUser)) {
+            } else if ("Q".equals(inputUser) || "q".equals(inputUser)) {
                 aquarium1.sauvegarder("save.poisson");
                 break;
 

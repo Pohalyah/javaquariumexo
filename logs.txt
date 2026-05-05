@@ -1,0 +1,12 @@
+05/05/2026 16:34:21 Adrien a mordu Jerome
+Adrien a gagné 5, il a désormais 10 pv
+Jerome a perdu 4 pv, il a désormais 1 pv
+05/05/2026 16:34:21 Maxime a mordu Jacobus
+Maxime a gagné 5, il a désormais 10 pv
+Jacobus a perdu 4 pv, il a désormais 1 pv
+05/05/2026 16:34:21 Tabata a mordu Adrien
+Tabata a gagné 5, il a désormais 10 pv
+Adrien a perdu 4 pv, il a désormais 6 pv
+05/05/2026 16:34:22 Adrien a mordu Olvier
+Adrien a gagné 5, il a désormais 9 pv
+Olvier a perdu 4 pv, il a désormais 5 pv
