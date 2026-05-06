@@ -21,9 +21,9 @@ public abstract class PoissonCarnivore extends Poisson implements Carnivore {
         String pvThisPoisson = (String.valueOf(getPv()));
         poisson.setPv(poisson.getPv() - moinsPv);
         String pvPoisson = (String.valueOf(poisson.getPv()));
-        String newLog = (dateNow + " " + this.getNom() + " a mordu " + poisson.getNom() + "\n" + this.getNom()
+        String newLog = (dateNow + " | " + this.getNom() + " a mordu " + poisson.getNom() + ", " + this.getNom()
                 + " a gagné " + ajoutPv
-                + ", il a désormais " + pvThisPoisson + " pv" + "\n" + poisson.getNom() + " a perdu " + moinsPv
+                + ", il a désormais " + pvThisPoisson + " pv, " + poisson.getNom() + " a perdu " + moinsPv
                 + " pv, il a désormais " + pvPoisson + " pv");
         Loggers.createLog(newLog);
     }

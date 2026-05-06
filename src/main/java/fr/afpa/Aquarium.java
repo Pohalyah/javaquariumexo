@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -43,6 +45,13 @@ public class Aquarium implements Serializable {
             ObjectOutputStream oos = new ObjectOutputStream(
                     new FileOutputStream(nomFichier));
             oos.writeObject(this);
+
+            String dateNow = LocalDateTime.now()
+                    .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+            String newLog = (dateNow + " | Nouvelle sauvegarde effectuée");
+            Loggers.createLog(newLog);
+
             oos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,6 +62,12 @@ public class Aquarium implements Serializable {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomFichier));
             Aquarium aquarium = (Aquarium) ois.readObject();
+
+            String dateNow = LocalDateTime.now()
+                    .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+            String newLog = (dateNow + " | Chargement effectué");
+            Loggers.createLog(newLog);
 
             ois.close();
 
@@ -129,6 +144,14 @@ public class Aquarium implements Serializable {
                         if (cePoisson.getSexe() != poissonChoisi.getSexe()) {
                             Poisson nouveauBebe = donnerNaissancePoisson(cePoisson);
                             poissonsNaissance.add(nouveauBebe);
+
+                            String dateNow = LocalDateTime.now()
+                                    .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+                            String newLog = (dateNow + " | " + cePoisson.getNom() + " et " + poissonChoisi.getNom()
+                                    + " ont donné naissance à "
+                                    + nouveauBebe.getNom());
+                            Loggers.createLog(newLog);
                         }
                     }
                 }
@@ -145,6 +168,12 @@ public class Aquarium implements Serializable {
             if (cetAlgue.getPv() >= 10) {
                 Algue nouveauAlgue = cetAlgue.seReproduire();
                 alguesNaissance.add(nouveauAlgue);
+
+                String dateNow = LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+                String newLog = (dateNow + " | Une algue s'est divisé et a donné naissance à un bébé algue");
+                Loggers.createLog(newLog);
             }
         }
         algues.addAll(alguesNaissance);
@@ -185,6 +214,14 @@ public class Aquarium implements Serializable {
         poissonsMortsTemp.clear();
         for (int i = 0; i < poissons.size(); i++) {
             if (poissons.get(i).estMort()) {
+
+                String dateNow = LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+                String newLog = (dateNow + " | " + poissons.get(i).getNom() + " est mort à " + poissons.get(i).getAge()
+                        + " ans");
+                Loggers.createLog(newLog);
+
                 temp = poissons.get(i);
                 poissonsMortsTemp.add(temp);
             }
@@ -198,6 +235,13 @@ public class Aquarium implements Serializable {
         alguesMortesTemp.clear();
         for (int i = 0; i < algues.size(); i++) {
             if (algues.get(i).estMort()) {
+
+                String dateNow = LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+                String newLog = (dateNow + " | " + "une algue est morte à " + algues.get(i).getAge() + " ans");
+                Loggers.createLog(newLog);
+
                 temp = algues.get(i);
                 alguesMortesTemp.add(temp);
             }
@@ -217,6 +261,9 @@ public class Aquarium implements Serializable {
     public void jouerTour() {
 
         System.out.println(numeroTour + 1);
+
+        String newLog = ("Tour numéro " + (numeroTour + 1) + " commence");
+        Loggers.createLog(newLog);
 
         for (int i = 0; i < poissons.size(); i++) {
             poissons.get(i).vivreUnTour();
