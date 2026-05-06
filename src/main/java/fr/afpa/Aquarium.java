@@ -250,6 +250,48 @@ public class Aquarium implements Serializable {
         algues.removeAll(alguesMortesTemp);
     }
 
+    public Poisson ajouterPoisson(String race, String nom) {
+
+        int sexeRandom = r.nextInt(0, 2);
+        int ageRandom = r.nextInt(0, 6);
+        Sexe sexePoisson;
+        Poisson nouveauPoisson;
+
+        if (sexeRandom == 0) {
+            sexePoisson = Sexe.MALE;
+
+        } else {
+            sexePoisson = Sexe.FEMELLE;
+
+        }
+
+        if ("bar".equals(race)) {
+
+            nouveauPoisson = new Bar(nom, sexePoisson);
+        } else if ("carpe".equals(race)) {
+
+            nouveauPoisson = new Carpe(nom, sexePoisson);
+        } else if ("merou".equals(race)) {
+
+            nouveauPoisson = new Merou(nom, sexePoisson);
+        } else if ("poissonclown".equals(race)) {
+
+            nouveauPoisson = new PoissonClown(nom, sexePoisson);
+        } else if ("sole".equals(race)) {
+
+            nouveauPoisson = new Sole(nom, sexePoisson);
+        } else if ("thon".equals(race)) {
+
+            nouveauPoisson = new Thon(nom, sexePoisson);
+        } else {
+            throw new IllegalStateException("Erreur.");
+        }
+
+        nouveauPoisson.setAge(ageRandom);
+        poissons.add(nouveauPoisson);
+        return nouveauPoisson;
+    }
+
     public boolean isEmpty() {
         if (poissons.size() <= 0) {
             return true;
@@ -260,7 +302,7 @@ public class Aquarium implements Serializable {
 
     public void jouerTour() {
 
-        System.out.println(numeroTour + 1);
+        System.out.println("===== Tour " + numeroTour + 1 + " =====");
 
         String newLog = ("Tour numéro " + (numeroTour + 1) + " commence");
         Loggers.createLog(newLog);

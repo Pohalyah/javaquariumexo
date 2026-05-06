@@ -60,6 +60,7 @@ public class Application {
             System.out.println("S = Sauvegarder");
             System.out.println("C = Charger sauvegarde");
             System.out.println("Q = Sauvegarder et quitter partie");
+            System.out.println("I = Insérer un poisson");
 
             String inputUser = scanner.nextLine();
 
@@ -75,6 +76,47 @@ public class Application {
             } else if ("Q".equals(inputUser) || "q".equals(inputUser)) {
                 aquarium1.sauvegarder("save.poisson");
                 break;
+
+            } else if ("I".equals(inputUser) || "i".equals(inputUser)) {
+                boolean verifRace = false;
+                boolean verifNom = false;
+                String parsedRace = " ";
+                String parsedNom = " ";
+                while (verifRace != true) {
+                    System.out.println("Entrez la race du poisson: (bar, carpe, merou, poissonclown, sole, thon)");
+                    String race = scanner.nextLine();
+                    parsedRace = race.toLowerCase().replace(" ", "").replaceAll("[^a-z]", "");
+                    if ("bar".equals(parsedRace) || "carpe".equals(parsedRace) || "merou".equals(parsedRace)
+                            || "poissonclown".equals(parsedRace) || "sole".equals(parsedRace)
+                            || "thon".equals(parsedRace)) {
+                        verifRace = true;
+                    }
+                }
+                while (verifNom != true) {
+
+                    System.out.println("Entrez le nom du poisson: ");
+                    String nom = scanner.nextLine();
+                    String nomToVerif = nom.toLowerCase().replaceAll("[^a-zA-Z ]", "").replaceAll("\\s+", " ").trim();
+
+                    String[] mots = nomToVerif.split(" ");
+                    StringBuilder resultat = new StringBuilder();
+
+                    for (String mot : mots) {
+
+                        mot = mot.substring(0, 1).toUpperCase()
+                                + mot.substring(1);
+
+                        resultat.append(mot).append(" ");
+                    }
+                    parsedNom = resultat.toString();
+                    if (parsedNom.length() > 24) {
+                        System.out.println("Nom trop long, veuillez réessayer");
+                    } else {
+                        verifNom = true;
+                    }
+                }
+
+                aquarium1.ajouterPoisson(parsedRace, parsedNom);
 
             }
 
